@@ -1,0 +1,29 @@
+#include<iostream>
+#include<string>
+#include<queue>
+using namespace std;
+
+int main(){
+    int N;
+    cin>>N;
+    queue<int>Q;
+    int temp=0;
+    if(N>=4){
+        Q.push(4);
+    }
+   if(N>=7){
+        Q.push(7);
+    }
+    
+    while(!Q.empty()){
+        temp=Q.front();
+        Q.pop();
+        if(temp*10+4<=N){
+            Q.push(temp*10+4);
+        }
+        if(temp*10+7<=N){
+            Q.push(temp*10+7);
+        }
+    }
+    cout<<temp<<endl;
+}
