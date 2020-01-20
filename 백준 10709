@@ -1,0 +1,40 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+char arr[101][101];
+
+int main(){
+    int H,W;
+    cin>>H>>W;
+    int answer[101][101];
+    
+       for(int i=0;i<H;i++){
+            for(int j=0;j<W;j++){
+                answer[i][j]=-1;
+            }
+           
+        }
+    
+    for(int i=0;i<H;i++){
+        int check_cloud=-1;
+        for(int j=0;j<W;j++){
+            cin>>arr[i][j];
+            
+            if(arr[i][j]=='c'){
+                check_cloud=j;
+                answer[i][j]=0;
+            }
+            else{
+                if(check_cloud!=-1)
+                    answer[i][j]=j-check_cloud;
+            }
+        }
+    }
+     for(int i=0;i<H;i++){
+          for(int j=0;j<W;j++){
+              cout<<answer[i][j]<<" ";
+          }
+          cout<<endl;
+      }
+}
