@@ -1,0 +1,42 @@
+#include<iostream>
+
+using namespace std;
+int arr[501];
+int answer;
+int main() {
+	int H, W;
+	cin >> H >> W;
+		for (int j = 0; j < W; j++) {
+			cin >> arr[j];
+		}
+
+	//기준점 세우고
+	//왼쪽부터 진행
+	//다시 오른쪽 으로 진행
+		int	temp = arr[0];
+		int cur = 0;
+	for (int i = 0; i < W; i++) {
+		if (arr[i] >= temp) {
+			for (int j = cur; j < i; j++) {
+				answer += (temp - arr[j]);
+			}
+			cur = i;
+			temp = arr[i];
+		}
+
+	}
+	temp = arr[W - 1];
+	cur = W - 1;
+	for (int i = W-1; i >= 0; i--) {
+		if (arr[i] > temp) {
+			for (int j = cur; j > i; j--) {
+				answer += (temp - arr[j]);
+			}
+			cur = i;
+			temp = arr[i];
+		}
+	}
+
+	cout << answer << endl;
+
+}
