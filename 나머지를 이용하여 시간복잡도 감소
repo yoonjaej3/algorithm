@@ -1,0 +1,25 @@
+a 3000
+b 5000
+budget 23000
+result 2
+
+
+
+
+#include<iostream>
+
+using namespace std;
+int answer;
+int main() {
+	int a, b;
+	cin >> a >> b;
+	int budget;
+	cin >> budget;
+
+	for (int i = 0; i <= budget / b; i++) {
+		if ((budget - (b * i)) % a == 0) {
+			answer++;
+		}
+	}
+	cout << answer << endl;
+}
