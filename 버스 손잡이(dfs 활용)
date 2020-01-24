@@ -1,0 +1,46 @@
+#include<iostream>
+#include<vector>
+#include<queue>
+
+using namespace std;
+
+int last_stage;
+int answer_check;
+void go(int cur_jump, int cur_stage, queue<int>Q) { 
+   if (last_stage == cur_stage) {
+      answer_check = 1;
+   }
+   int arr_jump[3];
+   arr_jump[0] = cur_jump - 1;
+   arr_jump[1] = cur_jump;
+   arr_jump[2] = cur_jump + 1;
+
+   if (!Q.empty()) {
+      for (int i = 0; i < 3; i++) {
+         if ((cur_stage + arr_jump[i]) == Q.front()) {
+            Q.pop();
+            go(arr_jump[i], cur_stage + arr_jump[i], Q);
+         }
+      }
+   }
+}
+
+
+int main() {
+   queue<int>Q;
+   for (int i = 0; i < 8; i++) {
+      int x;
+      cin >> x;
+      Q.push(x);
+   }
+   last_stage = Q.back();
+   int cur_jump = 1;
+   int cur_stage = 0;
+
+   go(cur_jump, cur_stage, Q);
+   
+   if (answer_check)
+      cout << "true" << endl;
+   else
+      cout << "false" << endl;
+}
