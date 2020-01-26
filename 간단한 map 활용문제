@@ -1,0 +1,30 @@
+[[1, 4], [3, 4], [3, 10]]	   [1, 10]
+[[1, 1], [2, 2], [1, 2]]	   [2, 1]
+
+사각형 만들기
+
+
+#include <iostream>
+#include <vector>
+#include<map>
+using namespace std;
+
+map<int,int>m1;
+map<int,int>m2;
+vector<int> solution(vector<vector<int> > v) {
+    vector<int> ans;
+    for(int i=0;i<v.size();i++){
+        m1[v[i][0]]++;
+        m2[v[i][1]]++;
+    }
+    for(auto it=m1.begin();it!=m1.end();it++){
+        if(it->second==1)
+            ans.push_back(it->first);
+    }
+    for(auto it=m2.begin();it!=m2.end();it++){
+        if(it->second==1)
+            ans.push_back(it->first);
+    }           
+
+    return ans;
+}
