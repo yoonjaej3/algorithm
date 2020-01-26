@@ -1,0 +1,74 @@
+#include<iostream>
+#include<string>
+#include<algorithm>
+using namespace std;
+int N,K;
+string word[51];
+
+int answer;
+void go(int alpha,int alpha_num,int visited[51]){
+    if(alpha_num==K){
+        int temp_answer=0;
+        for(int i=0;i<N;i++){
+            int flag=0;
+            for(int j=0;j<word[i].size();j++){
+                if(!visited[word[i][j]-'a']){
+                    flag=1;
+                    break;
+                }
+            }
+            if(!flag){
+                //cout<<word[i]<<endl;
+                temp_answer++;
+            }
+        }
+
+        answer=max(answer,temp_answer);
+        return;
+    }
+    else{
+        for(int i=alpha;i<27;i++){
+            if(!visited[i]){
+                visited[i]=1;
+                go(i,alpha_num+1,visited);
+                visited[i]=0;
+            }
+        }
+    }
+}
+
+
+
+int main(){
+   
+    cin>>N>>K;
+    if(K<5){
+        cout<<"0"<<endl;
+        return 0;
+    }
+    if(K>27){
+        cout<<N<<endl;
+        return 0;
+    }
+    
+    for(int i=0;i<N;i++){
+        cin>>word[i];
+        word[i]=word[i].substr(4);
+        
+        for(int j=0;j<4;j++)
+            word[i].pop_back();
+    }
+    int visit[27];
+    for(int i=0;i<27;i++)
+        visit[i]=0;
+    
+    visit['a'-'a']=1;
+    visit['n'-'a']=1;
+    visit['t'-'a']=1;
+    visit['i'-'a']=1;
+    visit['c'-'a']=1;
+    
+    go(0,5,visit);
+    cout<<answer<<endl;
+    
+}
