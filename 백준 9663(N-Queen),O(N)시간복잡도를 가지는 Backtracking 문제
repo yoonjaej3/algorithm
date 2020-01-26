@@ -1,0 +1,49 @@
+#include<iostream>
+using namespace std;
+
+bool arr[14][14];//행 열 
+int ans = 0;
+int N;
+
+bool isValid(int i, int cnt) {
+	int y = i;
+	int x;
+	for (x = 0; x < cnt; x++) { //가로
+		if (arr[y][x])
+			return false;
+	}
+
+	for (y = i, x = cnt; x >= 0, y >= 0; x--, y--) { //11시 대각선 
+		if (arr[y][x])
+			return false;
+	}
+	for (y = i, x = cnt; x >= 0, y < N; x--, y++) { //7시 대각선 
+		if (arr[y][x])
+			return false;
+	}
+	return true;
+}
+
+void dfs(int cnt) {
+	if (cnt == N) {
+		ans++;
+		return;
+	}
+	else {
+		for (int i = 0; i < N; i++) {
+			if (!arr[i][cnt] && isValid(i, cnt)) {
+				arr[i][cnt] = true;
+				dfs(cnt + 1);
+				arr[i][cnt] = false;
+			}
+		}
+	}
+
+}
+
+int main() {
+	cin >> N;
+	dfs(0);
+	cout << ans;
+	return 0;
+}
