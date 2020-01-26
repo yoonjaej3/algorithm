@@ -1,0 +1,32 @@
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+int main() {
+	int N;
+	cin >> N;
+	for (int i = 0; i < N; i++) {
+		string s;
+		cin >> s;
+		int flag = 0;
+		int visited[27] = { 0, };
+		for (int j = 0; j < s.size(); j++) {
+			visited[s[j] - 'A']++;
+			if (visited[s[j] - 'A'] == 3) {
+				if (s[j] != s[j + 1]) {
+					cout << "FAKE" << endl;
+					flag = 1;
+					break;
+				}
+				else {
+					visited[s[j] - 'A'] = 0;
+					j++;
+				}
+			}
+		}
+		if(!flag)
+			cout << "OK" << endl;
+
+	}
+}
