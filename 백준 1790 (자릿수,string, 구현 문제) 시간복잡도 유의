@@ -1,0 +1,41 @@
+#include<iostream>
+#include<string>
+#include<algorithm>
+using namespace std;
+
+int N,K;
+char answer;
+int main(){
+   
+    cin>>N>>K;
+    int cur_digit=1;
+    int prev_count=0;
+    int cur_count=0;
+    int flag=0;
+  
+    for(int i=1;i<=N;i++){
+        int temp_num=i;
+      
+        while(temp_num>=10){
+                temp_num=temp_num/10;
+                cur_digit++;
+            }
+        
+        cur_count=prev_count+cur_digit;
+        //cout<<"확인 "<<i<<" "<<prev_count<<" "<<cur_count<<endl;
+        if(prev_count<K && K<=cur_count){
+            string s="";
+            s+=to_string(i);
+            int temp=K-prev_count;
+            answer=s[temp-1];
+            flag=1;
+            break;
+        }
+        cur_digit=1;
+        prev_count=cur_count;
+    }
+  if(flag)
+      cout<<answer<<endl;
+  else
+      cout<<"-1"<<endl;
+}
