@@ -1,0 +1,79 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+char arr[12][12];
+int dx[4] = { 0,0,1,-1 };
+int dy[4] = { 1,-1,0,0 };
+vector<int>A;
+vector<int>B;
+int main() {
+	int R, C;
+	cin >> R >> C;
+	for (int i = 0; i <= R+1; i++) {
+		for (int j = 0; j <= C+1; j++) {
+			arr[i][j] = '.';
+		}
+	}
+	for (int i = 1; i <= R; i++) {
+		for (int j = 1; j <= C; j++) {
+			cin >> arr[i][j];
+		}
+	}
+
+	char copy[12][12];
+	for (int i = 0; i <= R+1; i++) {
+		for (int j = 0; j <= C+1; j++) {
+			copy[i][j] = arr[i][j];
+		}
+	}
+
+	for (int i = 1; i <= R; i++) {
+		for (int j = 1; j <= C; j++) {
+			int count = 0;
+			for (int k = 0; k < 4; k++) {
+				int next_i = i + dx[k];
+				int next_j = j + dy[k];
+				if (arr[next_i][next_j] == '.')
+					count++;
+			}
+			if (count >= 3) {
+				copy[i][j] = '.';
+			}
+
+		}
+	}
+	for (int i = 0; i <= R+1; i++) {
+		for (int j = 0; j <= C+1; j++) {
+			arr[i][j] = copy[i][j];
+		}
+	}
+
+
+	for (int i = 1; i <= R; i++) {
+		for (int j = 1; j <= C; j++) {
+			if (arr[i][j] == 'X') {
+				A.push_back(i);
+				B.push_back(j);
+			}
+		}
+	}
+	sort(A.begin(), A.end());
+	sort(B.begin(), B.end());
+	
+	//cout << endl;
+	//cout << A[0] << " " << A[A.size() - 1] << endl;
+	//cout << B[0] << " " << B[B.size() - 1] << endl;
+	if (!A.empty() && !B.empty()) {
+		for (int i = A[0]; i <= A[A.size() - 1]; i++) {
+			for (int j = B[0]; j <= B[B.size() - 1]; j++) {
+				cout << arr[i][j];
+			}
+			cout << endl;
+		}
+	}
+
+	
+
+}
