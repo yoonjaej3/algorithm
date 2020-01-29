@@ -1,0 +1,48 @@
+#include <string>
+#include <vector>
+#include<iostream>
+using namespace std;
+int n,m,t,k;
+int answer;
+
+void go(int day,int did,int will_do,int arr[6]){
+    if(day==n){
+        for(int i=0;i<=n-t;i++){
+            int sum=0;
+            for(int j=0;j<t;j++){
+
+                sum+=arr[i+j];
+            }  
+            if(sum>k)
+                return;
+        }
+        if(will_do==0){
+            /*
+            for(int i=0;i<n;i++)
+                cout<<arr[i]<<" ";
+            cout<<endl;
+            */
+            answer++;
+        }
+    }
+    else{
+        for(int i=0;i<=will_do;i++){
+            arr[day]+=i;
+            go(day+1,did+i,will_do-i,arr);
+            arr[day]-=i;
+        }
+    }
+}
+
+
+int solution(int N, int M, int T, int K) {
+
+    n=N; m=M; t=T; k=K;
+    int arr[6]={0,};
+    for(int i=0;i<=M;i++){
+        arr[0]+=i;
+        go(1,i,M-i,arr);
+        arr[0]-=i;
+    }
+    return answer;
+}
