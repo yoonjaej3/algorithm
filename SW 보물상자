@@ -1,0 +1,118 @@
+#include<iostream>
+#include<deque>
+#include<string.h>
+#include<vector>
+#include<map>
+#include<math.h>
+#include<algorithm>
+using namespace std;
+int N,K;
+
+bool m_sort(string a,string b){
+
+    for(int i=0;i<N/4;i++){
+        if(a[i]-'0'>b[i]-'0'){
+            return true;
+        }
+        else if(a[i]-'0'== b[i]-'0')
+            continue;
+        else
+            return false;
+    }
+    return false;
+}
+
+void go(){
+    
+}
+
+
+
+int main()
+{
+    
+    int test_case;
+    int T;
+    cin>>T;
+    for(test_case = 1; test_case <= T; ++test_case)
+    {
+        
+        cin>>N>>K;
+        string s;
+        cin>>s;
+        deque<char>dq;
+        map<string,int>m;
+        for(int i=0;i<s.size();i++){
+            dq.push_back(s[i]);
+        }
+        deque<char>Tdq(dq);
+        for(int a=0;a<N/4;a++){
+            for(int i=0;i<4;i++){
+                string tmp="";
+                for(int j=0;j<N/4;j++){
+                    char c_temp=Tdq.front();
+                    Tdq.pop_front();
+                    tmp+=c_temp;
+                    Tdq.push_back(c_temp);
+                }
+                m[tmp]++;
+            }
+            char a_temp=Tdq.back();
+            Tdq.pop_back();
+            Tdq.push_front(a_temp);
+        }
+        
+
+        vector<string>V;
+        for(auto it=m.begin();it!=m.end();it++){
+            if(it->second>0)
+                V.push_back(it->first);
+        }
+        sort(V.begin(),V.end(),m_sort);
+        /*
+        cout<<endl;
+        for(int i=0;i<V.size();i++){
+            cout<<V[i]<<" ";
+        }
+        cout<<endl;
+        */
+        string answer="";
+        answer+=V[K-1];
+        int digit=N/4 -1;
+        int temp=0;
+        for(int i=0;i<answer.size();i++){
+            //cout<<answer[i]<<endl;
+            switch(answer[i]){
+                case 'A':
+                    temp+=10*pow(16,digit);
+                    break;
+                case 'B':
+                    temp+=11*pow(16,digit);
+                    break;
+                case 'C':
+                    temp+=12*pow(16,digit);
+                    break;
+                case 'D':
+                    temp+=13*pow(16,digit);
+                    break;
+                case 'E':
+                    temp+=14*pow(16,digit);
+                    break;
+                case 'F':
+                    temp+=15*pow(16,digit);
+                    break;
+                default:
+                    temp+=(answer[i]-'0')*pow(16,digit);
+                    break;
+            }
+            digit--;
+        }
+        cout<<"#"<<test_case<<" "<<temp<<endl;
+         
+         
+    }
+         
+    return 0;//정상종료시 반드시 0을 리턴해야합니다.
+    
+
+}
