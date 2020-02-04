@@ -1,0 +1,55 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int result[1001];
+
+bool m_sort(pair<int,int>A,pair<int,int>B){
+    if(A.first>B.first)
+            return true;
+    else if(A.first==B.first){
+        if(A.second<B.second)
+            return true;
+    }
+    return false;
+};
+
+int main(){
+    
+    int N,M;
+    cin>>N>>M;
+    vector<pair<int,int>>V;
+    
+    for(int i=1;i<=N;i++){
+        int a;
+        cin>>a;
+        V.push_back({a,i}); //비용 index
+    }
+    sort(V.begin(),V.end(),m_sort);
+     
+    for(int i=0;i<M;i++){
+        int a;
+        cin>>a;
+        int m_index=1002;
+        for(int j=0;j<V.size();j++){
+            if(a>=V[j].first){
+                if(m_index>V[j].second){
+                    m_index=min(m_index,V[j].second);
+                }
+            }
+
+        }
+        //cout<<"확인"<<m_index<<endl;
+        result[m_index]++;
+    }
+    
+    int ans=0;
+    int ans_index=0;
+    for(int i=1;i<1001;i++){
+        if(result[i]>ans){
+            ans_index=i;
+            ans=result[i];
+        }
+    }
+    cout<<ans_index<<endl;
+}
