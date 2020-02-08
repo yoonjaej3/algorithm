@@ -1,0 +1,59 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include<queue>
+#include <algorithm>
+using namespace std;
+ 
+int n;
+int parent[1001];
+vector<pair <pair<int,int>,int> > edge;
+int cost[1001][1001];
+int findParent(int node) {
+    if (node == parent[node])
+        return node;
+    else
+        return parent[node] = findParent(parent[node]);
+}
+ 
+void merge(int node1, int node2) {
+    
+    node1= findParent(node1);
+    node2= findParent(node2);
+    parent[node2] = node1;
+ 
+}
+ 
+ 
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cin >> n;
+ 
+    for (int i = 1; i <= n; i++) {
+        parent[i] = i;
+    }
+ 
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) 
+            cin >> cost[i][j];
+    }
+    for (int i = 1; i <= n; i++) {
+        for (int j = i + 1; j <= n; j++) {
+            edge.push_back(make_pair(make_pair(cost[i][j],i),j));
+        }
+    }
+    sort(edge.begin(), edge.end());
+    long long ret = 0;
+    
+    for (int i = 0; i < edge.size(); i++) {
+        
+        if (findParent(edge[i].first.second) != findParent(edge[i].second))
+        {
+            ret += edge[i].first.first;
+            merge(edge[i].first.second, edge[i].second);
+        }
+    }
+    cout << ret;
+    return 0;
+}
