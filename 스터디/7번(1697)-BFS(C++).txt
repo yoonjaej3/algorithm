@@ -1,0 +1,50 @@
+#include <iostream>
+#include<algorithm>
+#include<vector>
+#include<queue>
+using namespace std;
+
+bool visited[100001];
+int A, B;
+int answer=100001;
+
+
+int main()
+{
+	
+	cin >> A >> B;
+	visited[A] = true;
+	queue<pair<int, int>>Q;
+	Q.push({ A,0 });
+	while (!Q.empty()) {
+		int cur = Q.front().first;
+		int cnt = Q.front().second;
+		Q.pop();
+
+		if (cur == B) {
+			if (answer > cnt)
+				answer = cnt;
+		}
+
+		if (cur + 1 <= 100001) {
+			if (!visited[cur + 1]) {
+				visited[cur + 1] = true;
+				Q.push({ cur + 1, cnt + 1 });
+			}
+		}
+
+		if (0 <= cur - 1) {
+			if (!visited[cur - 1]) {
+				visited[cur - 1] = true;
+				Q.push({ cur - 1, cnt + 1 });
+			}
+		}
+		if (2 * cur <= 100001) {
+			if (!visited[2 * cur]) {
+				visited[2 * cur] = true;
+				Q.push({ 2 * cur, cnt + 1 });
+			}
+		}
+	}
+	cout << answer << endl;
+}

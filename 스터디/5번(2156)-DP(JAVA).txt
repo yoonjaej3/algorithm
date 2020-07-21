@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class Main {
+	
+	static int[][] memo=new int[10000][3];
+	static int []arr=new int[10000];
+
+	static int dp_topdown(int cur, int length) {
+		if (cur < 0)return 0;
+		if (memo[cur][length] != -1) return memo[cur][length];
+
+		if (length > 0)
+			memo[cur][length] = dp_topdown(cur - 1, length - 1) + arr[cur];
+		else
+			memo[cur][length] = Math.max(Math.max(dp_topdown(cur - 1, 0),dp_topdown(cur - 1,1)),dp_topdown(cur - 1, 2));
+
+		return memo[cur][length];
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int N;
+		Scanner scan=new Scanner(System.in);
+		N=scan.nextInt();
+		for (int i = 0;i < N;i++) {
+			arr[i]=scan.nextInt();
+		}
+
+		for (int i = 0;i < N;i++) {
+			for (int j = 0;j < 3;j++) {
+				memo[i][j] = -1;
+			}
+		}
+		int answer = 0;
+		answer = Math.max(Math.max(dp_topdown(N - 1, 0), dp_topdown(N - 1, 1)),dp_topdown(N - 1, 2));
+		System.out.println(answer);
+	}
+
+}

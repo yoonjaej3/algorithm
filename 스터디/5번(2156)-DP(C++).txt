@@ -1,0 +1,36 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int memo[10000][3];
+int arr[10000];
+
+int dp_topdown(int cur, int length) {
+	if (cur < 0)return 0;
+	if (memo[cur][length] != -1) return memo[cur][length];
+
+	if (length > 0)
+		memo[cur][length] = dp_topdown(cur - 1, length - 1) + arr[cur];
+	else
+		memo[cur][length] = max({ dp_topdown(cur - 1, 0),dp_topdown(cur - 1,1),dp_topdown(cur - 1, 2) });
+
+	return memo[cur][length];
+}
+
+
+int main() {
+	int N;
+	cin >> N;
+	
+	for (int i = 0;i < N;i++) {
+		cin >> arr[i];
+	}
+
+	for (int i = 0;i < N;i++) {
+		for (int j = 0;j < 3;j++) {
+			memo[i][j] = -1;
+		}
+	}
+	int answer = 0;
+	answer = (max({ dp_topdown(N - 1, 0), dp_topdown(N - 1, 1), dp_topdown(N - 1, 2) }));
+	cout << answer << endl;
+}

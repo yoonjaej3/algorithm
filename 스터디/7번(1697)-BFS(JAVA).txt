@@ -1,0 +1,59 @@
+
+import java.awt.Point;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class Main {
+
+
+	public static void main(String[] args) {
+		Integer[] visited=new Integer[100002];
+		Arrays.fill(visited,0);
+		int A, B;
+		int answer=100001;
+		Scanner scan=new Scanner(System.in);
+		A=scan.nextInt();
+		B=scan.nextInt();
+		Queue<Point>Q= new LinkedList<Point>();
+		
+		visited[A]=1;
+		 Q.add(new Point(A,0));
+		while (!Q.isEmpty()) {
+			int cur = Q.peek().x;
+			int cnt = Q.peek().y;
+			Q.poll();
+
+			if (cur == B) {
+				
+				if (answer > cnt)
+					answer = cnt;
+				
+			}
+
+			if (cur + 1 <= 100001) {
+				if (visited[cur + 1]==0) {
+					visited[cur + 1] = 1;
+					Q.add(new Point(cur + 1, cnt + 1));
+				}
+			}
+
+			if (0 <= cur - 1) {
+				if (visited[cur - 1]==0) {
+					visited[cur - 1] = 1;
+					Q.add(new Point(cur - 1, cnt + 1));
+				}
+			}
+			if (2 * cur <= 100001) {
+				if (visited[2 * cur]==0) {
+					visited[2 * cur] = 1;
+					Q.add(new Point(2*cur, cnt + 1));
+				}
+			}
+		}
+			System.out.println(answer);
+	}
+
+}
+
