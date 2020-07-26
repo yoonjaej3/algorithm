@@ -1,0 +1,54 @@
+#include <iostream>
+#include <algorithm>
+#include<string.h>
+#include<vector>
+#include<queue>
+using namespace std;
+vector<int>V[101];
+int answer[101][101];
+int main() {
+	int N;
+	cin >> N;
+
+	for (int i = 1;i <= N;i++) {
+		for (int j = 1;j <= N;j++) {
+			int x;
+			cin >> x;
+			if (x == 1)
+				V[i].push_back(j);
+		}
+	}
+
+	for (int i = 1;i <= N;i++) {
+		bool visited[101][101];
+		memset(visited, 0, sizeof(visited));
+
+
+		int start = i;
+		queue<int>Q;
+		Q.push(start);
+		
+		while (!Q.empty()) {
+			int cur_x = Q.front();
+			Q.pop();
+
+
+			for (int j = 0;j < V[cur_x].size();j++) {
+				int next = V[cur_x][j];
+				if (!visited[cur_x][next]) {
+					visited[cur_x][next] = true;
+					answer[i][next] = true;
+					//cout << "확인  "<<i<<" 층 " << cur_x << " " << next << endl;
+					Q.push(next);
+				}
+			}
+		}
+	}
+	for (int i = 1;i <= N;i++) {
+		for (int j = 1;j <= N;j++)
+			cout << answer[i][j] << " ";
+
+		cout << endl;
+	}
+
+}

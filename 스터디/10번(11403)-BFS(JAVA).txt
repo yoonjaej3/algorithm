@@ -1,0 +1,63 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class Main {
+
+
+	public static void main(String[] args) {
+		ArrayList<Integer>[] V=new ArrayList[101];
+		int[][] answer=new int[101][101];
+		int N;
+		Scanner scan=new Scanner(System.in);
+		N=scan.nextInt();
+
+		for (int i = 1;i <= N;i++) {
+			V[i] = new ArrayList();
+			for (int j = 1;j <= N;j++) {
+				int x;
+				x=scan.nextInt();
+				if (x == 1)
+					V[i].add(j);
+			}
+		}
+
+		for (int i = 1;i <= N;i++) {
+			Integer[][] visited=new Integer[101][101];
+
+		     for(int a=0;a<101;a++) {
+		    	 for(int b=0;b<101;b++)
+		    		 visited[a][b]=0;
+		     }
+
+			int start = i;
+			Queue<Integer> Q=new LinkedList<Integer>();
+			Q.add(start);
+			
+			while (!Q.isEmpty()) {
+				int cur_x = Q.poll();
+
+
+				for (int j = 0;j < V[cur_x].size();j++) {
+					int next = V[cur_x].get(j);
+					if (visited[cur_x][next]==0) {
+						visited[cur_x][next] = 1;
+						answer[i][next] = 1;
+						Q.add(next);
+					}
+				}
+			}
+		}
+		for (int i = 1;i <= N;i++) {
+			for (int j = 1;j <= N;j++)
+					System.out.print(answer[i][j]+" ");
+
+			System.out.println();
+		}
+
+	}
+
+}
+

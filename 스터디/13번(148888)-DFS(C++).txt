@@ -1,0 +1,74 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+int N;
+int max_answer = -987654321;
+int min_answer = 987654321;
+void dfs(int cur, int sum, vector<int>V, vector<int>opp) {
+	if (cur == N-1) {
+
+		if (max_answer < sum)
+			max_answer = sum;
+
+		if (min_answer > sum)
+			min_answer = sum;
+	}
+	else {
+	
+		for (int i = 0; i < 4; i++) {
+			vector<int>temp_opp(opp);
+			int temp_sum = sum;
+			if (opp[i] > 0) {
+				switch (i) {
+				case 0:
+					temp_sum += V[cur + 1];
+					temp_opp[i]--;
+					break;
+				case 1:
+					temp_sum -= V[cur + 1];
+					temp_opp[i]--;
+					break;
+				case 2:
+					temp_sum *=  V[cur + 1];
+					temp_opp[i]--;
+					break;
+				case 3:
+					temp_sum /=V[cur + 1];
+					temp_opp[i]--;
+					break;
+				}
+
+				dfs(cur + 1, temp_sum, V, temp_opp);
+			}
+
+		}
+	}
+}
+
+
+int main() {
+
+	cin >> N;
+	vector<int>V;
+	vector<int>opp;
+
+	for (int i = 0; i < N; i++) {
+		int x;
+		cin >> x;
+		V.push_back(x);
+	}
+
+
+	for (int i = 0; i < 4; i++) {
+		int x;
+		cin >> x;
+		opp.push_back(x);
+	}
+
+	dfs(0,V[0], V, opp);
+	
+	cout << max_answer << endl;
+	cout << min_answer << endl;
+
+		
+}
