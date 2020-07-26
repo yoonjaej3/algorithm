@@ -1,0 +1,27 @@
+#include<iostream>
+
+using namespace std;
+
+int main() {
+   int first = 1;
+   int second = 2;
+   int third = first + second;
+   int ans = 0;
+   ans+=second;//2번째 항일떄 카운팅
+
+   while (third <= 4000000) { //3번쨰 항부터 체크
+
+      if (third % 2 == 0) //짝수이면
+         ans += third;
+
+
+
+      int temp;
+      temp = third;
+      third = temp + second;
+      first = second;
+      second = temp;
+
+   }
+   cout << ans << endl;
+}

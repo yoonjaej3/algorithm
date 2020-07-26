@@ -1,0 +1,48 @@
+#include<iostream>
+#include<algorithm>
+#include<math.h>
+#include<string>
+using namespace std;
+
+int main() {
+	string s;
+	s = to_string(pow(2, 1000));
+	cout << s << endl;
+	int sum = 0;
+	for (int i = 0; i < s.size(); i++) {
+		if (s[i] == '.') {
+			break;
+		}
+		sum += (s[i] - '0');
+	}
+
+
+
+	cout << sum << endl;
+}
+
+
+package com.company;
+
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        String s;
+        BigDecimal num = new BigDecimal(Math.pow(2,1000));
+        s=num.toString();
+        int sum = 0;
+        for (int i = 0; i < s.length(); i++) {
+
+            sum +=(s.charAt(i)-'0');
+        }
+
+
+        System.out.println(sum);
+    }
+}

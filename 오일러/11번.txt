@@ -1,0 +1,104 @@
+#include<iostream>
+
+using namespace std;
+int dx[4] = { 1,0,1,-1 };//오른쪽,아래,5시,7시
+int dy[4] = { 0,1,1,1 };
+int main() {
+
+	int arr[21][21];
+	int max = 0;
+	for (int i = 0; i < 20; i++) {
+		for (int j = 0; j < 20; j++)
+			cin >> arr[i][j];
+	}
+	
+	for (int i = 0; i < 20; i++) { //x좌표
+		for (int j = 0; j < 20; j++) {//y좌표
+	
+			for (int k = 0; k < 4; k++) {//방향
+				int count = 0;
+				int sum = 1;
+				for (int l = 0; l < 4; l++) { //갯수
+					int nx = i + l*dx[k];
+					int ny = j + l*dy[k];
+					if (nx >= 0 && ny >= 0 && nx < 20 && ny < 20) {
+						count++;
+					}
+				}
+
+
+				if (count == 4) {//성립한다면
+					
+					for (int l = 0; l < 4; l++) { 
+						int nx = i + l * dx[k];
+						int ny = j + l * dy[k];
+						sum *= arr[nx][ny];
+
+					}
+					if (sum >= max)
+						max = sum;
+				}
+
+			}
+		}
+	}
+	cout << max << endl;
+}
+
+
+
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        int[] dx= { 1,0,1,-1 };//오른쪽,아래,5시,7시
+        int[] dy= { 0,1,1,1 };
+        int[][] arr=new int[21][21];
+        int max = 0;
+        Scanner sc=new Scanner(System.in);
+
+
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++)
+                arr[i][j]=sc.nextInt();
+        }
+
+
+        for (int i = 0; i < 20; i++) { //x좌표
+            for (int j = 0; j < 20; j++) {//y좌표
+
+                for (int k = 0; k < 4; k++) {//방향
+                    int count = 0;
+                    int sum = 1;
+                    for (int l = 0; l < 4; l++) { //갯수
+                        int nx = i + l*dx[k];
+                        int ny = j + l*dy[k];
+                        if (nx >= 0 && ny >= 0 && nx < 20 && ny < 20) {
+                            count++;
+                        }
+                    }
+
+
+                    if (count == 4) {//성립한다면
+
+                        for (int l = 0; l < 4; l++) {
+                            int nx = i + l * dx[k];
+                            int ny = j + l * dy[k];
+                            sum *= arr[nx][ny];
+
+                        }
+                        if (sum >= max)
+                            max = sum;
+                    }
+
+                }
+            }
+        }
+
+        System.out.println(max);
+    }
+}

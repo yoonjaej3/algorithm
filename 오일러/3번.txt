@@ -1,0 +1,21 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+
+int main() {
+   long long n;
+   cin >> n;
+   stack<long long>s;
+
+   long long num = 2;
+   while (num <= n) {
+      if (n%num == 0) {
+         s.push(num);
+         n /= num;
+      }
+      num++;
+   }
+
+      cout << s.top() << endl;
+   
+}

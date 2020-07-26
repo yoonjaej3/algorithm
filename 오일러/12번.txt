@@ -1,0 +1,101 @@
+#include<iostream>
+#include<map>
+using namespace std;
+
+int main() {
+	int num;
+	int cur = 1;
+	int count = 1;
+	while (1) {
+		count++;
+		cur = cur + count;
+		
+		num = 1;
+		int temp_cur = cur;
+		map<int, int>m;
+		while (1) {
+			for (int i = 2; i <= temp_cur; i++) {
+				if (temp_cur%i == 0) {
+					temp_cur /= i;
+					m[i]++;
+					break;
+				}
+			}
+
+			if (temp_cur <= 1)
+				break;
+		}
+
+		for (auto it = m.begin(); it != m.end(); it++) {
+			num *= (it->second + 1);
+		}
+		if (num >=500) {
+			/*
+			for (auto it = m.begin(); it != m.end(); it++) {
+				cout << it->first << " " << it->second << endl;
+			}
+			*/
+			break;
+		}
+	}
+	cout << cur << endl;
+}
+
+
+package com.company;
+
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        int num;
+        int cur = 1;
+        int count = 1;
+        while (true) {
+            count++;
+            cur = cur + count;
+
+            num = 1;
+            int temp_cur = cur;
+            Map<Integer,Integer> m=new HashMap<>();
+            while (true) {
+                for (int i = 2; i <= temp_cur; i++) {
+                    if (temp_cur%i == 0) {
+                        temp_cur /= i;
+
+                        if(m.containsKey(i)){ //키가 포함되어 있다면
+
+                                int number_count=m.get(i)+1;
+                                m.remove(i);
+                                m.put(i,number_count);
+
+                                //m.put(i,m.get(i)+1);
+                        }
+                        else{ //키가 없다면
+                            m.put(i,1);
+                        }
+
+                        break;
+                    }
+                }
+
+                if (temp_cur <= 1)
+                    break;
+            }
+
+            for(int key:m.keySet()){ 
+                num*=(m.get(key)+1);
+            }
+
+            if (num >=500) {
+                break;
+            }
+        }
+        System.out.println(cur);
+    }
+}
+

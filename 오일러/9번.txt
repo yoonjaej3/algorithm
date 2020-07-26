@@ -1,0 +1,36 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main() {
+	
+	for (int a = 1; a < 1000/3; a++) { //a의 최대범위는 332
+		for (int b = a + 1; b < (1000 - a) / 2; b++) { 
+			for (int c = b + 1; b + c <= 1000; c++) {
+				if (a*a + b * b == c * c && a+b+c==1000) {
+					cout << a * b*c << endl;
+				}
+			}
+		}
+	}
+}
+
+import java.util.Scanner;
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		for (int a = 1; a < 1000/3; a++) { //a의 최대범위는 332
+			for (int b = a + 1; b < (1000 - a) / 2; b++) { 
+				for (int c = b + 1; c <= 1000-a-b; c++) {
+					if (a*a + b * b == c * c && a+b+c==1000) {
+						System.out.println(a*b*c);
+					}
+				}
+			}
+		}
+
+	}
+
+}
+

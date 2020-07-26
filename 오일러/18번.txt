@@ -1,0 +1,75 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+vector<vector<int>>V(15);
+
+int answer;
+void dfs(int cur_stage, int cur_index, int sum) {
+
+	if (cur_stage == 14) {
+		if (sum > answer)
+			answer=sum;
+	}
+
+	else {
+		dfs(cur_stage + 1, cur_index, sum + V[cur_stage + 1][cur_index]);
+		dfs(cur_stage + 1, cur_index+1, sum + V[cur_stage + 1][cur_index+1]);
+	}
+
+}
+
+
+int main() {
+	for (int i = 0; i < 15; i++) {
+		for (int j = 0; j <= i; j++) {
+			int x;
+			cin >> x;
+			V[i].push_back(x);
+		}
+	}
+
+	dfs(0, 0,V[0][0]);
+	cout << answer << endl;
+	
+}
+
+
+
+
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+    static int[][] A = new int[15][];
+    private static int answer;
+
+    static void dfs(int cur_stage, int cur_index, int sum) {
+
+        if (cur_stage == 14) {
+            if (sum > answer)
+                answer = sum;
+        } else {
+            dfs(cur_stage + 1, cur_index, sum + A[cur_stage + 1][cur_index]);
+            dfs(cur_stage + 1, cur_index + 1, sum + A[cur_stage + 1][cur_index + 1]);
+        }
+
+    }
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        for (int i = 0; i < 15; i++) {
+            A[i]=new int[i+1];
+            for (int j = 0; j <= i; j++) {
+                int x;
+                x = scan.nextInt();
+                A[i][j] = x;
+            }
+        }
+
+        dfs(0, 0, A[0][0]);
+        System.out.println(answer);
+
+    }
+}

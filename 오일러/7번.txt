@@ -1,0 +1,28 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main() {
+	int num = 1;
+	int start_num = 3;
+	int answer = 0;
+	while (num<10001) {
+		int flag = 0;
+		for (int i = 2; i < start_num; i++) {
+			if (start_num %i == 0) {
+				flag = 1;	
+				break;
+			}
+		}
+	
+		if (!flag) {
+			//cout << start_num << endl;
+			answer = start_num;
+			num++;
+		}
+		start_num++;
+		
+	}
+	cout << answer << endl;
+	
+}

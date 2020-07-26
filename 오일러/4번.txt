@@ -1,0 +1,32 @@
+#include<iostream>
+#include<vector>
+#include<string>
+#include<algorithm>
+using namespace std;
+
+int main() {
+   vector<int>v;
+   for (int i = 100; i < 1000; i++) {
+      for (int j = 100; j < 1000; j++) {
+         string s_num = to_string(i*j);
+         int a = 0;
+         int b = s_num.size() - 1;
+
+         while (a <= b) { //대칭수 인지 확인
+            if (s_num[a] == s_num[b]) {
+               a++;
+               b--;
+            }
+            else
+               break;
+         }
+
+         if (a > b) {//대칭수 라면
+            v.push_back(i*j);
+         }
+      }
+   }
+   sort(v.begin(), v.end(), greater<int>());
+   cout << v[0] << endl;
+   
+}
