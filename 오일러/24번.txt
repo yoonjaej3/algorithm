@@ -1,0 +1,105 @@
+#include <iostream>
+#include<vector>
+#include<string>
+using namespace std;
+
+//C++ 재귀
+
+int answer;
+int cnt;
+void permu(string s,int visited[10],int num) {
+	if (num==10) {
+		cnt += 1;
+		if (cnt == 1000000)
+			cout << s << endl;
+		return;
+	}
+	else {
+		for (int i = 0;i <= 9;i++) {
+			if (!visited[i]) {
+				visited[i] = 1;
+				string temp_s = s;
+				temp_s += to_string(i);
+				permu(temp_s, visited, num+1);
+				visited[i] = 0;
+			}
+		}
+	}
+}
+int main() {
+	string s = "";
+	int visited[10];
+	memset(visited, 0, sizeof(visited));
+
+
+	permu(s, visited,0);
+
+}
+
+
+//C++ next_permutaion 사용
+
+#include <iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+
+int answer;
+int cnt;
+int main() {
+	vector<int>V;
+	for (int i = 0;i < 10;i++) {
+		V.push_back(i);
+	}
+	int cnt = 0;
+	do {
+		cnt++;
+		if (cnt == 1000000) {
+			for (int i = 0;i < V.size();i++)
+				cout << V[i];
+			cout << endl;
+			break;
+		}
+	} while (next_permutation(V.begin(), V.end()));
+
+}
+
+//Java 재귀
+
+package second;
+
+
+public class ForTest {
+	static int answer;
+	static int cnt;
+	static void permu(String s,int[] visited,int num) {
+		if (num==10) {
+			cnt += 1;
+			if (cnt == 1000000)
+				System.out.println(s);
+			return;
+		}
+		else {
+			for (int i = 0;i <= 9;i++) {
+				if (visited[i]==0) {
+					visited[i] = 1;
+					String temp_s = s;
+					temp_s += Integer.toString(i);
+					permu(temp_s, visited, num+1);
+					visited[i] = 0;
+				}
+			}
+		}
+	}
+
+
+	public static void main(String[] args) {
+		String s = "";
+		int[] visited=new int [10];
+
+		permu(s, visited,0);
+	}
+
+}
+
