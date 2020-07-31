@@ -1,0 +1,48 @@
+#include <iostream>
+#include<vector>
+#include<string>
+#include<map>
+#include<algorithm>
+using namespace std;
+
+
+int answer;
+int main() {
+	map<double, int>m;
+	for (int i = 2;i <= 100;i++) {
+		for (int j = 2;j <= 100;j++) {
+			m[pow(i, j)]++;
+		}
+	}
+
+	for (auto it = m.begin();it != m.end();it++) {
+		if (it->second > 0)
+			answer++;
+	}
+	cout << answer << endl;
+}
+
+package algorithm;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class main	 {
+
+	public static void main(String[] args) {
+		int answer=0;
+		Map<Double,Integer>m=new HashMap<Double,Integer>();
+		for (int i = 2;i <= 100;i++) {
+			for (int j = 2;j <= 100;j++) {
+				m.put(Math.pow(i, j), 1);
+			}
+		}
+	
+
+	
+		System.out.println(m.size());
+
+	}
+
+}
+

@@ -1,0 +1,61 @@
+#include <iostream>
+#include<vector>
+#include<string>
+#include<map>
+#include<algorithm>
+using namespace std;
+
+
+int answer;
+int arr[1002][1002];//원점 501,501
+int dx[4] = { 1,0,-1,-0 };
+int dy[4] = { 0,-1,0,1 };
+
+int dxx[2] = { 1,-1 };
+int dyy[2] = { 1,1 };
+int main() {
+	arr[501][501] = 1;
+	int next_start_x = 500;
+	int next_start_y = 502;
+	int multi = 2;
+	int num = 2;
+	while (multi<=2*500+1) {
+		//아래 왼쪽 위 오른쪽 2칸(3*3),4칸(5*5),6칸(7*7),8칸(9*9),10칸(11*11),1000칸 (1001*1001)
+		for (int i = 0;i < 4;i++) {
+			for (int j = 0;j < multi;j++) {
+				next_start_x += dx[i];
+				next_start_y += dy[i];
+				arr[next_start_x][next_start_y] = num;
+				num++;			
+			}
+		}
+		next_start_x -= 1;
+		next_start_y += 1;
+		multi+=2;
+	
+	}
+	int answer = 0;
+
+
+	
+	int next_x = 1;
+	int next_y = 1;
+	while (next_x<=1001&&next_y<=1001) { //아래 대각선
+		answer += arr[next_x][next_y];
+		next_x += dxx[0];
+		next_y += dyy[0];
+	}
+	next_x = 1001;
+	next_y = 1;
+	while (next_x >=1 && next_y <= 1001) { //아래 대각선
+		answer += arr[next_x][next_y];
+		next_x += dxx[1];
+		next_y += dyy[1];
+	}
+
+	answer -= 1;
+
+
+	cout << answer << endl;
+
+}
